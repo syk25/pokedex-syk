@@ -3,7 +3,7 @@ import { commandExit } from "./command_exit.js";
 import { commandMapForward, commandMapBack } from "./command_map.js";
 import { commandExplore } from "./command_explore.js";
 
-import type { CLICommand } from "../state.js";
+import type { CLICommand } from "../registry/state.js";
 
 export function getCommands(): Record<string, CLICommand> {
   return {
