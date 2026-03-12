@@ -1,4 +1,5 @@
 import { createInterface } from "readline";
+import { getCommands } from "./registry.js";
 
 export function cleanInput(input: string): string[] {
   const result = input.trim().toLowerCase().split(/\s+/);
@@ -19,7 +20,18 @@ export function startREPL() {
       rl.prompt();
       return;
     } else {
-      console.log(`Your command was: ${cleaned[0]}`);
+      // TODO: handle the command here
+      const commands = getCommands();
+      try {
+        if (cleaned[0] in commands) {
+          commands[cleaned[0]].callback(commands);
+        } else {
+          console.log(`Unknown command`);
+        }
+      } catch (error) {
+        console.error(`Error executing command: ${error}`);
+      }
+
       rl.prompt();
       return;
     }
